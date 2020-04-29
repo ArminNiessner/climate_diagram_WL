@@ -6,6 +6,7 @@ climate_graph_WL.graphWL(name, altitude, df, T_col, P_col, Tmin = None, Tmax = N
           Tdelta = None, absTmax = None, absTmin = None, center = "north", 
           coord = None, bar = False)
 ```
+![Climate Hohenheim](/HohenheimWL.png)
 
 parameter | explanation
 ---|---
