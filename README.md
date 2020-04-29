@@ -6,7 +6,6 @@ climate_graph_WL.graphWL(name, altitude, df, T_col, P_col, Tmin = None, Tmax = N
           Tdelta = None, absTmax = None, absTmin = None, center = "north", 
           coord = None, bar = False)
 ```
-![Climate Hohenheim](/HohenheimWL.png)
 
 parameter | explanation
 ---|---
@@ -23,3 +22,5 @@ parameter | explanation
 `center` | Set to "south" if station is located in the southern hemisphere. Default = "north"
 `coord` | Coordinates of the location to print in figure
 `bar` | Set to `True` if `df` is on a daily basis and a column for daily minimum temperature is provided, to show a bar under the graph that indicates months with temperatures below 0 ° C
+
+![Climate Hohenheim](/HohenheimWL.png)
