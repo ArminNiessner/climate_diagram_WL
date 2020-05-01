@@ -35,7 +35,7 @@ def graphWL(name, altitude, df, T_col, P_col, Tmin = None, Tmax = None,
     year = []
     year.append(df.index[0].year)
     year.append(df.index[-1].year)
-    ydelta = year[1] - year[0]
+    ydelta = year[1] - year[0] + 1
     
     df_mean = df.resample("MS").mean()
     df_min = df.resample("MS").min()
