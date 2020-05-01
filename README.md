@@ -10,7 +10,7 @@ climate_graph_WL.graphWL(name, altitude, df, T_col, P_col, Tmin = None, Tmax = N
 parameter | explanation
 ---|---
  `name` | Name of the station or location 
- `altitude`| Altitude above sealevel
+ `altitude`| Altitude above sea level
  `df` | A pandas dataframe. Index should be in pandas datetime format, having a monthly or better a daily frequency. The dataframe should have at least two columns with one for temperature and one for precipitation
 `T_col` | Name of the column with temperature observations in °C
 `P_col` | Name of the column with precipitation in mm
