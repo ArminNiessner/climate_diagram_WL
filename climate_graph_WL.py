@@ -36,7 +36,6 @@ def graphWL(name, altitude, df, T_col, P_col, Tmin = None, Tmax = None,
     year.append(df.index[0].year)
     year.append(df.index[-1].year)
     ydelta = year[1] - year[0]
-
     
     df_mean = df.resample("MS").mean()
     df_min = df.resample("MS").min()
@@ -130,21 +129,28 @@ def graphWL(name, altitude, df, T_col, P_col, Tmin = None, Tmax = None,
     ax3.plot(x, meanT_l, c = "r")
     ax4.plot(x, sumP_l, c = "b")
     sumP_2 = [y/2 for y in sumP_l]
-    ax1.fill_between(x, meanT_l, sumP_2, where = (np.asarray(meanT_l) < np.asarray(sumP_2)), 
+    
+    x_interp = np.arange(0.5, 14.5, 0.1)
+    meanT_interp = np.interp(x_interp, x, meanT_l)
+    sumP_interp = np.interp(x_interp, x, sumP_2)
+    zero_l = [0 for i in range(140)]
+    meanT_fill = np.maximum(meanT_interp, zero_l)
+        
+    ax1.fill_between(x_interp, meanT_fill, sumP_interp, where = (np.asarray(meanT_fill) < np.asarray(sumP_interp)), 
                      edgecolor='blue', facecolor = "w", interpolate = True, hatch = "||")
-    ax1.fill_between(x, meanT_l, sumP_2, where = (np.asarray(meanT_l) >= np.asarray(sumP_2)), 
-                     edgecolor='red', facecolor = "w", interpolate = True, hatch = ".")
+    ax1.fill_between(x_interp, meanT_fill, sumP_interp, where = (np.asarray(meanT_fill) >= np.asarray(sumP_interp)), 
+                     edgecolor='red', facecolor = "w", interpolate = True, hatch = "..")
     ax4.fill_between(x, sumP_l, 100, facecolor = "blue")
     if freeze:
         ax1.bar(x, freeze, 1, facecolor = "k", ec = "k")
     if p_freeze:
         ax1.bar(x, p_freeze, 1, facecolor = "w", hatch = "//")
 
-    ax1.set_ylim(-2.5,50)
+    ax1.set_ylim(-30,50)
     ax1.set_xticks(np.arange(1, 13))
     ax1.set_xticklabels(x_M)
     ax1.set_xlim(1,13)
-    ax2.set_ylim(-5,100)
+    ax2.set_ylim(-60,100)
     ax3.set_ylim(50,60)
     ax3.set_yticks([])
     ax3.set_xlim(1,13)
@@ -197,4 +203,6 @@ def graphWL(name, altitude, df, T_col, P_col, Tmin = None, Tmax = None,
     if absTmin != None:
         ax1.text(-0.1, 0.1, np.round(absTmin,1), fontsize = 12, ha='right', va='center', transform=ax1.transAxes)
     
+# graphWL("Fairbanks", "132", fairbanks_d.loc["1980":"2010",:], "Tmean", "PP", Tmin = "Tmin", Tmax = "Tmax", Tdelta = True, absTmax = "Tmax", absTmin = "Tmin", 
+#       coord = "64.8° N, 148° W", bar = True)
     
